@@ -41,7 +41,7 @@ export function PublicCalendar({ year, month, rows }: Props) {
         key={day}
         type="button"
         onClick={() => setOpenDay(day)}
-        className="flex min-h-24 flex-col gap-1 rounded-lg border border-zinc-100 bg-white p-1.5 text-left transition hover:border-zinc-300 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-zinc-700 dark:hover:bg-zinc-900/80"
+        className="flex min-h-20 flex-col gap-1 rounded-lg border border-zinc-100 bg-white p-1 text-left transition hover:border-zinc-300 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-zinc-700 dark:hover:bg-zinc-900/80 sm:min-h-24 sm:p-1.5"
       >
         <span className="text-xs font-semibold text-zinc-900 dark:text-zinc-50">
           {day}
@@ -49,21 +49,28 @@ export function PublicCalendar({ year, month, rows }: Props) {
         {count === 0 ? (
           <span className="text-[11px] text-zinc-400 dark:text-zinc-600">—</span>
         ) : (
-          <div className="flex flex-col gap-0.5 text-[11px] leading-snug">
-            {preview.map((ev) => (
-              <span
-                key={ev.id}
-                className="truncate text-zinc-700 dark:text-zinc-300"
-              >
-                {ev.title}
-              </span>
-            ))}
-            {extra > 0 ? (
+          <>
+            <div className="text-[11px] leading-snug sm:hidden">
               <span className="font-medium text-rose-600 dark:text-rose-400">
-                +{extra}개
+                {count}개
               </span>
-            ) : null}
-          </div>
+            </div>
+            <div className="hidden flex-col gap-0.5 text-[11px] leading-snug sm:flex">
+              {preview.map((ev) => (
+                <span
+                  key={ev.id}
+                  className="truncate text-zinc-700 dark:text-zinc-300"
+                >
+                  {ev.title}
+                </span>
+              ))}
+              {extra > 0 ? (
+                <span className="font-medium text-rose-600 dark:text-rose-400">
+                  +{extra}개
+                </span>
+              ) : null}
+            </div>
+          </>
         )}
       </button>
     );
