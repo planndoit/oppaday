@@ -9,7 +9,7 @@ export function GoogleLoginButton() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${origin}/auth/callback?next=/me`,
+        redirectTo: `${origin}/auth/callback`,
       },
     });
     if (error) {

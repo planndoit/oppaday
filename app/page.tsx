@@ -55,7 +55,7 @@ export default async function Home({
         <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
           오빠 오늘 무슨 날인지 몰라?
         </h1>
-        <p className="max-w-2xl text-base text-zinc-600 dark:text-zinc-400">
+        <p className="w-full text-base text-zinc-600 dark:text-zinc-400">
           누구나 달력을 구경할 수 있어요. 로그인하면{" "}
           <strong>무료로 3개</strong>까지 기념일을 올릴 수 있어요. 연인, 가족,
           친구의 생일과 기념일을 가볍게 모아 보세요.

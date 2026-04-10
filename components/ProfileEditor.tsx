@@ -13,6 +13,7 @@ export function ProfileEditor({ profile }: { profile: Profile }) {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
+  const [selectedFileName, setSelectedFileName] = useState<string>("");
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -51,17 +52,33 @@ export function ProfileEditor({ profile }: { profile: Profile }) {
         />
       </div>
       <div className="space-y-1.5">
-        <label htmlFor="profile_image_url" className="text-sm font-medium">
-          프로필 이미지 URL (선택)
+        <label htmlFor="profile_image_file" className="text-sm font-medium">
+          프로필 사진 (선택)
         </label>
         <input
-          id="profile_image_url"
-          name="profile_image_url"
-          type="url"
-          placeholder="https://..."
-          defaultValue={profile.profile_image_url ?? ""}
+          id="profile_image_file"
+          name="profile_image_file"
+          type="file"
+          accept="image/*"
+          onChange={(e) => {
+            const file = e.currentTarget.files?.[0];
+            setSelectedFileName(file?.name ?? "");
+          }}
           className="w-full rounded-lg border border-zinc-200 bg-white px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-950"
         />
+        <p className="text-xs text-zinc-500 dark:text-zinc-400">
+          모바일에서는 사진첩에서 고르거나 카메라 촬영 후 업로드할 수 있어요.
+        </p>
+        {selectedFileName ? (
+          <p className="text-xs text-zinc-600 dark:text-zinc-300">
+            선택한 파일: {selectedFileName}
+          </p>
+        ) : null}
+        {profile.profile_image_url ? (
+          <p className="text-xs text-zinc-500 dark:text-zinc-400">
+            새 파일을 선택하지 않으면 현재 프로필 사진을 유지합니다.
+          </p>
+        ) : null}
       </div>
       <button
         type="submit"
